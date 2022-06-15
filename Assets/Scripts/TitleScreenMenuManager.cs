@@ -15,6 +15,8 @@ public class TitleScreenMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        
         m_InputFieldPlayersName.onEndEdit.AddListener(ApplicationManager.Instance.setPlayersName);
         if (ApplicationManager.playersName != null)
         {

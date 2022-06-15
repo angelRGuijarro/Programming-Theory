@@ -11,7 +11,7 @@ public class ApplicationManager : MonoBehaviour
     void Start()
     {
         if (Instance == null)
-        {
+        {            
             Instance = this;
             DontDestroyOnLoad(this);
         }
