@@ -7,6 +7,9 @@ public class ApplicationManager : MonoBehaviour
     public static ApplicationManager Instance { get; private set; }
 
     public static string playersName { get; private set; }
+    
+    public string dextrous_lefty = "dextrous";
+
     // Start is called before the first frame update
     void Start()
     {
