@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Camera playersCamera;
+    protected Camera playersCamera;
     [SerializeField] Vector3 cameraOffsetOnLeft;
-    [SerializeField] Vector3 cameraOffsetOnRight;
+    protected Gun playersGun;
+    [SerializeField] Vector3 gunOffsetOnLeft;
+    protected GameObject cameraTuning;
+    [SerializeField] float cameraTuningRotationLeft = 15f;
+    enum Handed {dextrous, lefty};
+    [SerializeField] Handed handPreference;
     [SerializeField] Vector3 cameraRotation;
     [SerializeField] float speedWalking = 2f;
-    [SerializeField] float speedRuning = 6f;
-    //[SerializeField] float speedRotating = 360f;
+    [SerializeField] float speedRuning = 6f;    
     [SerializeField] float speedRotating = 2;
     private float m_yaw = 0;
     private float m_pitch = 0;
@@ -23,6 +27,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
+        playersCamera = gameObject.GetComponentInChildren<Camera>();
+        playersGun = gameObject.GetComponentInChildren<Gun>();
+        cameraTuning = GameObject.Find("CameraTuning");
+        // ABSTRACTION
+        SetHanded();
         //mainCamera.transform.position = gameObject.transform.forward
     }
 
@@ -39,5 +48,23 @@ public class PlayerController : MonoBehaviour
         transform.position += (transform.right * hInput * Time.deltaTime) + (transform.forward * vInput * Time.deltaTime);        
         transform.Rotate(transform.up, m_yaw);
         playersCamera.transform.Rotate(Vector3.right, m_pitch);
+        playersGun.transform.Rotate(Vector3.right, m_pitch);
+    }
+
+    public void SetHanded()
+    {
+        switch (handPreference)
+        {
+            case Handed.dextrous:
+                playersCamera.transform.position = transform.position + new Vector3(-cameraOffsetOnLeft.x, cameraOffsetOnLeft.y, cameraOffsetOnLeft.z);
+                playersGun.transform.position = transform.position + new Vector3(-gunOffsetOnLeft.x, gunOffsetOnLeft.y, gunOffsetOnLeft.z);
+                cameraTuning.transform.Rotate(new Vector3(0, cameraTuningRotationLeft, 0));
+                break;
+            default:                 
+                playersCamera.transform.position = transform.position + cameraOffsetOnLeft;
+                playersGun.transform.position = transform.position +  gunOffsetOnLeft;
+                cameraTuning.transform.Rotate(new Vector3(0, -cameraTuningRotationLeft, 0));
+                break;                
+        }
     }
 }
