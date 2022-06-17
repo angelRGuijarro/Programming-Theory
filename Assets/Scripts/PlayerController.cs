@@ -4,35 +4,41 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    protected Camera playersCamera;
+    [Header("Camera Adjustments")]    
     [SerializeField] Vector3 cameraOffsetOnLeft;
-    protected Gun playersGun;
     [SerializeField] Vector3 gunOffsetOnLeft;
-    protected GameObject cameraTuning;
+    [SerializeField] Vector3 cameraRotation;
     [SerializeField] float cameraTuningRotationLeft = 15f;
     enum Handed {dextrous, lefty};
     [SerializeField] Handed handPreference;
-    [SerializeField] Vector3 cameraRotation;
+    [Space]
+    [SerializeField] Texture aimTexture;
+    [Space]
+    [Header("Speed")]
     [SerializeField] float speedWalking = 2f;
     [SerializeField] float speedRuning = 6f;    
     [SerializeField] float speedRotating = 2;
+
+    protected Camera playersCamera;
+    protected Gun playersGun;
+    protected GameObject cameraTuning;
     private float m_yaw = 0;
     private float m_pitch = 0;
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;        
+        playersCamera = gameObject.GetComponentInChildren<Camera>();
+        //playersCamera = transform.Find("Camera3rd").gameObject.GetComponent<Camera>();
+        playersGun = gameObject.GetComponentInChildren<Gun>();
+        //playersGun = transform.Find("Gun").gameObject.GetComponent<Gun>();
+        cameraTuning = transform.Find("CameraTuning").gameObject;
     }
 
     // Start is called before the first frame update
     void Start()
-    {        
-        playersCamera = gameObject.GetComponentInChildren<Camera>();
-        playersGun = gameObject.GetComponentInChildren<Gun>();
-        cameraTuning = GameObject.Find("CameraTuning");
+    {
         // ABSTRACTION
-        SetHanded();
-        //mainCamera.transform.position = gameObject.transform.forward
+        SetHanded();        
     }
 
     // Update is called once per frame

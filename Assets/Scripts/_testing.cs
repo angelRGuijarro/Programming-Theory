@@ -17,8 +17,7 @@ public class _testing : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Bullet m_shot = Instantiate(testingShot) as Bullet; //if it's not a Bullet returns null
-            Debug.Log("Shot " + m_shot?.name);
+            Bullet m_shot = Instantiate(testingShot) as Bullet; //if it's not a Bullet returns null            
             m_shot.Shoot();
         }
     }

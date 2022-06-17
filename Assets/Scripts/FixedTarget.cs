@@ -5,9 +5,12 @@ using UnityEngine;
 // INHERITANCE
 public class FixedTarget : Target
 {
+    /// <summary>
+    /// Destroy Target if ammunition damage is equals or higher than target points value
+    /// </summary>
+    /// <param name="byAmmunition"></param>
     public override void isHitedBy(Ammunition byAmmunition)
-    {
-        Debug.Log("Hited!");
+    {        
         if (byAmmunition.dammage >= pointsValue)
         {
             Destroy(gameObject);
@@ -27,12 +30,10 @@ public class FixedTarget : Target
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collision detected");
+    {        
         Ammunition ammunition = collision.gameObject.GetComponent<Ammunition>();
         if (ammunition != null)
-        {
-            Debug.Log("Hited by " + ammunition.name);
+        {            
             this.isHitedBy(ammunition);
         }
         
