@@ -21,11 +21,6 @@ public class MovingTarget : Target
         RestartMovement();
     }
 
-    private void RestartMovement()
-    {
-        path = new Ray(startingPoint, endingPoint - startingPoint);
-        startMovingTime = Time.time;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,21 +32,30 @@ public class MovingTarget : Target
     // Update is called once per frame
     void Update()
     {
-        float distance = elapsedDistance(Time.time - startMovingTime);
-        if ((endingPoint-startingPoint).magnitude >= distance)
+        float elapsedDistance = (Time.time - startMovingTime) * speed;
+        if ((endingPoint-startingPoint).magnitude >= elapsedDistance)
         {
-            transform.position = path.GetPoint(distance);
+            transform.position = path.GetPoint(elapsedDistance);
         }else
         {
-            Vector3 tempPoint = endingPoint;
-            endingPoint = startingPoint;
-            startingPoint = tempPoint;
+            // ABSTRACTION
+            ReverseMovement();
             RestartMovement();
         }
     }
 
-    private float elapsedDistance(float elapsedTime)
+    // ABSTRACTION
+    private void ReverseMovement()
     {
-        return elapsedTime * speed;
+        Vector3 tempPoint = endingPoint;
+        endingPoint = startingPoint;
+        startingPoint = tempPoint;
     }
+
+    private void RestartMovement()
+    {
+        path = new Ray(startingPoint, endingPoint - startingPoint);
+        startMovingTime = Time.time;
+    }
+    
 }
