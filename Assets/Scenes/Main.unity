@@ -462,8 +462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5bd221433067eb4d98f1b335702d0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadedAmmo: {fileID: 6092727408492140776, guid: 6abccfed7b8180a438b726c9709cd4a5, type: 3}
-  fireRate: 6
+  primaryAmmo: {fileID: 6092727408492140776, guid: 6abccfed7b8180a438b726c9709cd4a5, type: 3}
+  secondaryAmmo: {fileID: 1526638258593304814, guid: 62b1d1006397f3e4a93025d54bd2a226, type: 3}
+  primaryFireRate: 15
+  secondaryFireRate: 0.25
 --- !u!1 &704703923
 GameObject:
   m_ObjectHideFlags: 0

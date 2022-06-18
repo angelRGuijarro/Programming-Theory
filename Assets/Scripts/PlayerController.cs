@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
         playersGun.transform.Rotate(Vector3.right, m_pitch);
     }
 
+    // ABSTRACTION
     public void SetHanded()
     {
         switch (handPreference)

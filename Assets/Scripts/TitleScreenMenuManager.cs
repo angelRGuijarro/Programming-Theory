@@ -24,14 +24,6 @@ public class TitleScreenMenuManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    
-
     public void StartButtonPressed()
     {
         //Check user has input a player's name        

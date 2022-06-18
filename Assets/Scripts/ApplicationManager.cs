@@ -24,12 +24,6 @@ public class ApplicationManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void setPlayersName(string name)
     {
         playersName = name;                    

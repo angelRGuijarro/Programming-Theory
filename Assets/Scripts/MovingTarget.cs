@@ -20,15 +20,7 @@ public class MovingTarget : Target
         // ABSTRACTION
         RestartMovement();
     }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {        
-
-    }
-
-    
+        
     // Update is called once per frame
     void Update()
     {
@@ -52,6 +44,7 @@ public class MovingTarget : Target
         startingPoint = tempPoint;
     }
 
+    // ABSTRACTION
     private void RestartMovement()
     {
         path = new Ray(startingPoint, endingPoint - startingPoint);

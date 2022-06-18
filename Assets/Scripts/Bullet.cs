@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 // INHERITANCE
 public class Bullet : Ammunition
 {
-    [SerializeField] float shootForce = 10;
-
+    [SerializeField] float shotForce = 10;
+    [Tooltip("Let bullets to stand for a while before disposing")]
+    [SerializeField] float objectLifeTime = 3f;
     
-    // Update is called once per frame
-    void Update()
+
+    public override void Fired()
     {
-
-    }
-
-    public void Shoot()
-    {         
-        rb.AddForce(transform.forward * shootForce);
-        Destroy(gameObject, 3);
-    }
+        rb.AddForce(transform.forward * shotForce);
+        Destroy(gameObject, objectLifeTime);
+    }    
 }
